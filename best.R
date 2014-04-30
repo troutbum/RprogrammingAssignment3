@@ -3,6 +3,8 @@
 
 best <- function(state, outcome) {
         
+        ## Check that state and outcome are valid 
+        ##
         # test to see if state 2-digit code arg is valid
         usstates <- read.csv("states.csv", colClasses = "character")
         valid_statecodes<- usstates[,"StateAbbr"]
@@ -26,36 +28,45 @@ best <- function(state, outcome) {
                 stop("Error in outcome case statement")
         }
         
-    
-        alldata <- read.csv("outcome-of-care-measures.csv")     # read complete data file
-        statedata <- alldata[alldata$State == state,]           # subset all rows for selected state        
-        statedata[,j] <- as.numeric(statedata[,j])              # convert to numeric data type
+        ## Read outcome data
+        ##
+        alldata <- read.csv("outcome-of-care-measures.csv",     # Data import problem resolved
+                            colClasses = "character")           # by coercing to "character"
+        statedata <- alldata[alldata$State == state,]           # subset all rows for selected state
         
+        # Convert to numeric, non-numeric data coerced to NAs
+        statedata[,j] <- suppressWarnings(as.numeric(statedata[,j]))
+            
+        # Condense data to just hospital and mortality rate
+        datacol <- subset(statedata)[,j]                                # extract mortality rate column
+        namecol <- as.character(subset(statedata)[,"Hospital.Name"])    # extract hospital name column
+        subDF <- cbind(namecol,datacol)                                 # create df with just 2 columns
         
+        # remove NA rows
+        cleanDF <- na.omit(subDF)
         
-        rate <- min(statedata[,j])                              # determine lowest mortality
-        i <- which.min(statedata[,j])                           # which row?
-        best_hospital <- as.character(statedata[i,"Hospital.Name"])
+        # add code to check for minimum thresholds?
+        #mydata$v1[mydata$v1=="Not Available"] <- NA
+        #rows <- nrow(statedata)
+        #statedata[[1,j]]
+        
+        # Sorted by rate, hospital name
+        
+        cleanDF[,2] <- as.numeric(cleanDF[,2])
+        sortedDF <- cleanDF[ order(cleanDF[,2], cleanDF[,1]), ] 
+        
+        #sortedDF <- cleanDF[order([,2], [,1]),] 
+        
+        ## Return hospital name in that state with lowest 30-day death rate
+        ## 
+        best_hospital <- as.character(sortedDF[1,1])
         return(best_hospital)
 }
 
-
-
-# further clean up data
-datacol <- subset(statedata)[,j]                                # extract mortality rate column
-namecol <- as.character(subset(statedata)[,"Hospital.Name"])    # extract hospital name column
-subDF <- cbind(namecol,datacol)                                 # create df with just 2 columns
-
-# add code to check for "not available" or minimum thresholds
-#mydata$v1[mydata$v1=="Not Available"] <- NA
-#rows <- nrow(statedata)
-#statedata[[1,j]]
-
-cleanDF <- na.omit(subDF)                                       # remove NA rows
-sortedDF <- cleanDF[ order(cleanDF[,2], cleanDF[,1]), ]         # sort by rate, hospital name
+# unused example code
+# rate <- min(statedata[,j])                              # determine lowest mortality
+# i <- which.min(statedata[,j])                           # which row?
+# best_hospital <- as.character(statedata[i,"Hospital.Name"])
 
 
 
-## Check that state and outcome are valid
-## Return hospital name in that state with lowest 30-day death
-## rate
