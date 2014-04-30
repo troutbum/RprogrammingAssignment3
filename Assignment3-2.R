@@ -2,9 +2,21 @@
 ## Programming Assignment 3 (Part 2)
 ##
 ## Finding the best hospital in a state
-## 
+##
 
-# Write a function called best that take two arguments: the 2-character
+setwd("~/CourseraHW/RprogrammingAssignment3")
+source("best.R")
+best(state = "TX", outcome = "heart attack")
+best(state = "TX", outcome = "heart failure")
+best(state = "MD", outcome = "heart attack")
+best(state = "MD", outcome = "pneumonia")
+best("BB", "heart attack")
+best("NY", "hert attack")
+best("OR", "heart attack")
+best("OR", "pneumonia")
+best(state = "OR", outcome = "heart failure")
+
+# Write a function called best() that takes two arguments: the 2-character
 # abbreviated name of a state and an outcome name. 
 
 # The function reads the outcome-of-care-measures.csv file and returns a
