@@ -31,48 +31,34 @@ best <- function(state, outcome) {
         ## Read outcome data
         ##
         alldata <- read.csv("outcome-of-care-measures.csv",     # Data import problem resolved
-                            colClasses = "character",           # by coercing to "character"
-                            stringsAsFactors=FALSE)             # (prevent creation of levels)
+                            colClasses = "character")           # by coercing to "character"                    
         statedata <- alldata[alldata$State == state,]           # subset all rows for selected state
         
-        # Convert to numeric, non-numeric data coerced to NAs
+        # Convert to numeric, non-numeric data (e.g. 'Not Available') coerced to NAs
         statedata[,j] <- suppressWarnings(as.numeric(statedata[,j]))
-            
+     
         # Condense data to just hospital and mortality rate
-        datacol <- as.numeric(subset(statedata)[,j])                             # extract mortality rate column
+        datacol <- as.numeric(subset(statedata)[,j])                    # extract mortality rate column 
         namecol <- as.character(subset(statedata)[,"Hospital.Name"])    # extract hospital name column
-        subDF <- cbind(namecol,datacol)                                # create df with just 2 columns
+        
+        # !!! Must use this CBIND.DATA.FRAME to add columns of numeric and character columns!!!
+        #subDF <- cbind(namecol,datacol)                                
+        subDF <- cbind.data.frame(namecol,datacol)                      
         
         # remove NA rows
         cleanDF <- na.omit(subDF)
         
-        # add code to check for minimum thresholds?
-        #mydata$v1[mydata$v1=="Not Available"] <- NA
-        #rows <- nrow(statedata)
-        #statedata[[1,j]]
-        
         # Sorted by rate, hospital name
-        
-        
-        #library(plyr)
-        #z <- arrange(cleanDF, datacol, namecol)
-        
-        cleanDF[, 2] <- as.numeric(cleanDF[, 2])
         sortedDF <- cleanDF[ order(cleanDF[,2], cleanDF[,1]), ] 
-        
-        # z <- cleanDF[with(cleanDF, order(datacol, namecol)), ]
-        
-        # dd[ order(-dd[,4], dd[,1]), ]
-      
-        #sortedDF <- cleanDF[order([,2], [,1]),] 
-        
+           
         ## Return hospital name in that state with lowest 30-day death rate
         ## 
         best_hospital <- as.character(sortedDF[1,1])
         return(best_hospital)
 }
 
-# unused example code
+## unused but useful example code
+#
 # rate <- min(statedata[,j])                              # determine lowest mortality
 # i <- which.min(statedata[,j])                           # which row?
 # best_hospital <- as.character(statedata[i,"Hospital.Name"])

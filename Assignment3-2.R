@@ -12,9 +12,10 @@ best(state = "MD", outcome = "heart attack")
 best(state = "MD", outcome = "pneumonia")
 best("BB", "heart attack")
 best("NY", "hert attack")
-best("OR", "heart attack")
-best("OR", "pneumonia")
-best(state = "OR", outcome = "heart failure")
+
+#best("OR", "heart attack")
+#best("OR", "pneumonia")
+#best(state = "OR", outcome = "heart failure")
 
 # Write a function called best() that takes two arguments: the 2-character
 # abbreviated name of a state and an outcome name. 
