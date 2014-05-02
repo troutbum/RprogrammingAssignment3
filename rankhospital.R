@@ -5,7 +5,7 @@
 #    * returns : a character vector with the name of the hospital that has the
 #      ranking specified by the num argument.
 
-rankhospital <- function(state, outcome, num) {
+rankhospital <- function(state, outcome, num = "best") {
         
         ## Check that state and outcome are valid 
         ##

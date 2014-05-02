@@ -51,8 +51,11 @@ rankall <- function(outcome, num = "best") {
         nRanked <- lapply(rankings, function(cleanDF) nrow(cleanDF))    # number of ranked hospitals per state
         
         # Read in US States table and coerce State codes
-        USstates <- read.csv("states.csv", colClasses = "character")
-        stateCodes <- USstates[,2]                                      # get state 2-char abbreviations
+        
+        #USstates <- read.csv("states.csv", colClasses = "character")
+        #stateCodes <- USstates[,2]                                      # get state 2-char abbreviations
+        
+        stateCodes <-sort(c(state.abb, "DC", "GU", "PR", "VI"))         # get state 2-char abbreviations
         nStates <- length(stateCodes)                                   # number of states (54 w/ DC, GU, PR, VI)
         
         # iterate through US states and find corresponding hospital for the given ranking
@@ -64,23 +67,20 @@ rankall <- function(outcome, num = "best") {
         # Iterate through all states
         for (i in 1:nStates) {  
                 
-                # Set rank based upon NUM input
-                # If NUM == a character vector
-                if (is.character(num)) {                                        
-                        if (num == "best") {
-                                rank <- 1                               # Best hospital in rankings
-                        }           
-                        if (num == "worst") {                           # Last hospital in rankings
-                                rank <- as.numeric(nRanked[i])
-                        }
-                        else {
-                                return("invalid input characters in num argument")
-                        }           
-                }        
-                # If NUM == a numeric vector
-                if (is.numeric(num)) {                                          
+                # Set RANK based upon NUM input             
+                if (is.character(num)) {                                # If NUM == a character vector          
+                        if (num == "best") {                               
+                                rank <- 1                               # best hospital
+                        } else if (num == "worst") { 
+                                rank <- as.numeric(nRanked[i])          # lookup last ranking
+                        } else stop("Input char NUM is 
+                                    neither 'best' nor 'worst'")
+                        
+                } else if (is.numeric(num)) {                           # If NUM == a numeric vector
                         rank <- as.integer(num)                                                   
-                }
+                } else stop("Problem with NUM arg, neither char nor numeric")                  
+                
+                
                 
                 stateRankings <- rankings[[stateCodes[i]]]              # to make ranked list of hospitals
                 stateHospital <- as.character(stateRankings[rank,1])    # pick hospital based on input NUM

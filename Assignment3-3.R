@@ -19,6 +19,11 @@ rankhospital("OR", "heart failure", "worst")
 rankhospital("OR", "pneumonia", "best")
 rankhospital("OR", "pneumonia", "worst")
 
+rankhospital("AL", "heart attack")              # "best" is default NUM arg in function
+rankhospital("OR", "heart failure")
+rankhospital("VA", "pneumonia")
+
+
 # Write a function called rankhospital that takes three arguments: the
 # 2-character abbreviated name of a state (state), an outcome (outcome), and the
 # ranking of a hospital in that state for that outcome (num). 

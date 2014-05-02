@@ -9,6 +9,18 @@ head(rankall("heart attack", 20), 10)
 tail(rankall("pneumonia", "worst"), 3)
 tail(rankall("heart failure"), 10)
 
+rankall("heart attack", 1)
+rankall("heart attack", "best")
+rankall("heart attack", "worst")
+
+rankall("heart failure", "best")
+rankall("heart failure", "worst")
+rankall("heart failure", 50)
+
+rankall("pneumonia", "best")
+rankall("pneumonia", "worst")
+
+
 # Write a function called rankall() that takes two arguments: an outcome name 
 # (outcome) and a hospital ranking (num). The function reads the 
 # outcome-of-care-measures.csv file and returns a 2-column data frame containing

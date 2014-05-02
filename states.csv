@@ -1,40 +1,40 @@
 StateName,StateAbbr,Numer
-Alabama,AL,0
 Alaska,AK,0
-Arizona,AZ,0
+Alabama,AL,0
 Arkansas,AR,0
+Arizona,AZ,0
 California,CA,0
 Colorado,CO,0
 Connecticut,CT,0
-Delaware,DE,0
 District of Columbia,DC,1
+Delaware,DE,0
 Florida,FL,0
 Georgia,GA,0
 Guam,GU,0
 Hawaii,HI,0
+Iowa,IA,1
 Idaho,ID,1
 Illinois,IL,0
 Indiana,IN,0
-Iowa,IA,1
 Kansas,KS,0
 Kentucky,KY,1
 Louisiana,LA,1
-Maine,ME,2
-Maryland,MD,0
 Massachusetts,MA,2
+Maryland,MD,0
+Maine,ME,2
 Michigan,MI,0
 Minnesota,MN,1
-Mississippi,MS,0
 Missouri,MO,0
+Mississippi,MS,0
 Montana,MT,0
+North Carolina,NC,0
+North Dakota,ND,1
 Nebraska,NE,0
-Nevada,NV,1
 New Hampshire,NH,1
 New Jersey,NJ,2
 New Mexico,NM,1
+Nevada,NV,1
 New York,NY,3
-North Carolina,NC,0
-North Dakota,ND,1
 Ohio,OH,0
 Oklahoma,OK,0
 Oregon,OR,2
@@ -46,10 +46,10 @@ South Dakota,SD,1
 Tennessee,TN,0
 Texas,TX,0
 Utah,UT,1
-Vermont,VT,2
 Virginia,VA,0
 Virgin Islands,VI,0
+Vermont,VT,2
 Washington,WA,2
-West Virginia,WV,0
 Wisconsin,WI,0
+West Virginia,WV,0
 Wyoming,WY,0
