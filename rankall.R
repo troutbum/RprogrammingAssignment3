@@ -60,9 +60,9 @@ rankall <- function(outcome, num = "best") {
         
         # iterate through US states and find corresponding hospital for the given ranking
         
-        outputDF <- data.frame(HospitalName=character(),                # create dataframe for output
-                               StateName=character(),
-                               stringsAsFactors=FALSE) 
+        outputDF <- data.frame(hospital=character(),                # create dataframe for output
+                               state=character(),
+                               stringsAsFactors=FALSE)
         
         # Iterate through all states
         for (i in 1:nStates) {  
@@ -84,8 +84,8 @@ rankall <- function(outcome, num = "best") {
                 
                 stateRankings <- rankings[[stateCodes[i]]]              # to make ranked list of hospitals
                 stateHospital <- as.character(stateRankings[rank,1])    # pick hospital based on input NUM
-                outputDF[i,"HospitalName"] <- stateHospital             # stuff results into data.frame
-                outputDF[i,"StateName"] <- stateCodes[i]               
+                outputDF[i,"hospital"] <- stateHospital             # stuff results into data.frame
+                outputDF[i,"state"] <- stateCodes[i]               
         } 
         return(outputDF)
 }
