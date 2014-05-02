@@ -4,7 +4,7 @@
 #    * returns : a dataframe with the hospital names and 2-char state name for the given ranking (num)
 #                for all 50 states and the District of Columbia
 
-rankall <- function(outcome, num) {
+rankall <- function(outcome, num = "best") {
         
         ## Check that outcome arg is valid 
         ##
@@ -31,7 +31,7 @@ rankall <- function(outcome, num) {
         
         # Condense data to just hospital, mortality rate and state
         datacol <- suppressWarnings(as.numeric(subset(alldata)[,j]))    # extract mortality rate column non-numeric 
-        # data  (e.g. 'Not Available') coerced to NAs
+                                                                        # data  (e.g. 'Not Available') coerced to NAs
         namecol <- as.character(subset(alldata)[,"Hospital.Name"])      # extract hospital name column
         statecol <- as.character(subset(alldata)[,"State"])             # extract State name                
         
@@ -56,8 +56,6 @@ rankall <- function(outcome, num) {
         nStates <- length(stateCodes)                                   # number of states (54 w/ DC, GU, PR, VI)
         
         # iterate through US states and find corresponding hospital for the given ranking
-        
-        rank <- 1
         
         outputDF <- data.frame(HospitalName=character(),                # create dataframe for output
                                StateName=character(),
